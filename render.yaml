@@ -3,10 +3,8 @@ services:
     name: devrelay-mermail-skill
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npx tsx src/server/mock_mermail_server.ts
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
