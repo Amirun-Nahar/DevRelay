@@ -8,6 +8,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
 [![Tests](https://img.shields.io/badge/Tests-6%2F6%20Passed-brightgreen.svg)](#testing-plan)
 [![Safety](https://img.shields.io/badge/Human_Approval_Gate-Enforced-emerald.svg)](#human-approval-gate)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Amirun-Nahar/DevRelay)
 
 ---
 
