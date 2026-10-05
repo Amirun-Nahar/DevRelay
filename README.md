@@ -8,7 +8,10 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
 [![Tests](https://img.shields.io/badge/Tests-6%2F6%20Passed-brightgreen.svg)](#testing-plan)
 [![Safety](https://img.shields.io/badge/Human_Approval_Gate-Enforced-emerald.svg)](#human-approval-gate)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-devrelay--8gd1.onrender.com-success?logo=render)](https://devrelay-8gd1.onrender.com)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Amirun-Nahar/DevRelay)
+
+> 🌐 **Live Web Console & API**: **[https://devrelay-8gd1.onrender.com](https://devrelay-8gd1.onrender.com)**
 
 ---
 
