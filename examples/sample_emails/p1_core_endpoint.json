@@ -1,0 +1,8 @@
+{
+  "id": "msg_p1_pipeline_failure",
+  "from": "sarah.eng@streamcloud.net",
+  "to": "support@mermail.com",
+  "subject": "Production ingestion pipeline throwing 502 Bad Gateway on POST /v1/events",
+  "body": "Hi Support Team,\n\nOur production ingestion pipeline is throwing 502 Bad Gateway errors on POST /v1/events since 09:00 UTC.\n\nTrace ID: tr_8f902a1b\nSDK: mermail-python-v2.1.0\nEnvironment: Production\n\nAll real-time streaming batches are failing with no available workaround. We need on-call assistance ASAP.\n\nThanks,\nSarah Jenkins",
+  "timestamp": "2026-10-02T09:14:02Z"
+}

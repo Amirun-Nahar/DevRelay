@@ -1,0 +1,38 @@
+{
+  "name": "@mermail/skill-devrelay",
+  "version": "1.0.0",
+  "description": "DevRelay: Technical Incident Relay Agent Skill for Mermail. Automatically detects, triages, extracts diagnostic context, evaluates severity (P0-P3), drafts engineering briefs, customer replies, and prepares escalation workflows under a strict Human Approval Gate.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx src/server/mock_mermail_server.ts",
+    "start": "tsx src/server/mock_mermail_server.ts",
+    "build": "tsc",
+    "test": "tsx tests/run_all.ts",
+    "cli": "node scripts/send_test_email.js"
+  },
+  "keywords": [
+    "mermail",
+    "agent-skill",
+    "devrelay",
+    "incident-response",
+    "triage",
+    "sre",
+    "devops",
+    "hackathon-2026"
+  ],
+  "author": "DevRelay Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

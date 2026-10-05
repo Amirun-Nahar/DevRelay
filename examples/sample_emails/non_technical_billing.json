@@ -1,0 +1,8 @@
+{
+  "id": "msg_non_tech_billing",
+  "from": "accounting@partnercorp.com",
+  "to": "support@mermail.com",
+  "subject": "Invoice clarification & enterprise pricing inquiry for Q4 renewal",
+  "body": "Hi Sales and Billing Support,\n\nWe received our September invoice #INV-2026-9921 and would like to review the line item regarding additional seat licensing. Could you also please provide an updated quote for our Q4 contract renewal with enterprise discounts?\n\nPlease send over the updated PDF.\n\nWarm regards,\nJennifer Miller\nAccounts Payable",
+  "timestamp": "2026-10-02T13:45:00Z"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "msg_payment_failure_01",
+  "from": "alex.dev@enterpriseapp.io",
+  "to": "support@mermail.com",
+  "subject": "CRITICAL: API returning 500 on /v1/checkout/charge",
+  "body": "Hi Support Team,\n\nOur production app is completely unable to process payments. We are receiving 500 Internal Server Error responses on every call to POST https://api.service.com/v1/checkout/charge.\n\nTrace ID: tr_99214_prod\nSDK: mermail-node-v3.4.1\nTime: 10:15 AM EST\nAuthorization: Bearer sec_tok_live_89123849182390123\n\nThis is blocking all user transactions. Please help urgently!\n\nBest,\nAlex",
+  "timestamp": "2026-10-02T10:15:00Z"
+}

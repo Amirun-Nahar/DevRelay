@@ -1,0 +1,8 @@
+{
+  "id": "msg_p2_rate_limit",
+  "from": "dave.tse@appflow.io",
+  "to": "support@mermail.com",
+  "subject": "Unexpected 429 Too Many Requests in Staging Sandbox environment",
+  "body": "Hello,\n\nWe are testing our load simulator in the Staging sandbox environment and hitting HTTP 429 Too Many Requests after only 15 calls to /v2/analytics/reports. The staging quota is supposed to be 100 req/sec.\n\nWorkaround: We have temporarily enabled local caching which keeps us testing, but the rate limit misconfiguration should be fixed.\n\nSDK: mermail-node-v3.2.0\nEnvironment: Staging\nRequest ID: req_stg_44129b\n\nThanks,\nDave",
+  "timestamp": "2026-10-02T11:20:00Z"
+}

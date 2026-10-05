@@ -1,0 +1,8 @@
+{
+  "id": "msg_p3_typo_sdk",
+  "from": "clara.dev@devstudio.co",
+  "to": "support@mermail.com",
+  "subject": "Minor typo in mermail-python docs & feature suggestion",
+  "body": "Hi DevRel team,\n\nI noticed a small typo in the docs for the Python SDK on section 4.2: 'autenticate' instead of 'authenticate'. Also would love if the next release of mermail-python could expose a helper for async batching.\n\nKeep up the great work!\nClara",
+  "timestamp": "2026-10-02T12:00:00Z"
+}

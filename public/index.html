@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevRelay: Technical Incident Relay Agent Skill | Mermail</title>
+  <meta name="description" content="Intelligent, autonomous agent skill for Mermail that triages frantic customer bug reports into structured engineering briefs and customer acknowledgments under a strict Human Approval Gate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <div class="logo-icon">⚡</div>
+        <div class="brand-text">
+          <span class="brand-name">DevRelay</span>
+          <span class="brand-tag">Mermail Skill Engine</span>
+        </div>
+      </div>
+      <div class="agent-status-pill" id="agentStatusPill">
+        <span class="status-dot pulsing"></span>
+        <span class="status-label">Autonomous Agent Active</span>
+      </div>
+      <div class="security-gate-badge" title="Zero autonomous external messages permitted without explicit human verification">
+        <span class="lock-icon">🔒</span>
+        <span>Human Approval Gate: <strong>ENFORCED</strong></span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="metric-pill">
+        <span class="metric-label">MTTD Reduction:</span>
+        <span class="metric-value">80%</span>
+      </div>
+      <div class="wallet-badge" id="walletBadgeBtn" title="Agent Web3 / x402 Autonomous Micro-Settlement Wallet">
+        <span class="wallet-icon">💼</span>
+        <span class="wallet-balance" id="walletBalanceText">5,000.00 USDC</span>
+        <span class="network-tag">Base L2</span>
+      </div>
+      <button class="btn btn-secondary btn-sm" id="customEmailModalBtn">
+        <span>+ Custom Email</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Three-Column Dashboard Grid -->
+  <main class="dashboard-container">
+    <!-- COLUMN 1: Inbound Email Stream & Scenario Presets -->
+    <aside class="sidebar-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span class="icon">📥</span>
+          <h2>Inbound Feed & Test Presets</h2>
+        </div>
+        <span class="badge badge-subtle" id="fixtureCount">8 Fixtures</span>
+      </div>
+
+      <!-- Quick Fixture Launcher -->
+      <div class="scenario-buttons-container">
+        <div class="section-subtitle">Hackathon Test Scenarios</div>
+        <div class="scenario-buttons" id="scenarioButtons">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Selected Email Inspector -->
+      <div class="email-inspector-card">
+        <div class="inspector-header">
+          <span class="email-badge" id="emailTypeBadge">Selected Message</span>
+          <span class="email-time" id="emailTimestamp">--:--:--</span>
+        </div>
+        <div class="email-meta-field">
+          <span class="meta-label">From:</span>
+          <span class="meta-val" id="emailFrom">--</span>
+        </div>
+        <div class="email-meta-field">
+          <span class="meta-label">Subject:</span>
+          <span class="meta-val highlight" id="emailSubject">--</span>
+        </div>
+        <div class="email-body-preview-container">
+          <div class="body-header">Raw Email Body</div>
+          <pre class="email-body-text" id="emailBody">Select a scenario preset above or ingest a custom email to begin analysis.</pre>
+        </div>
+        <button class="btn btn-primary btn-block" id="reanalyzeBtn">
+          <span>⚡ Re-Analyze with DevRelay</span>
+        </button>
+      </div>
+
+      <!-- Live Pipeline Audit Log -->
+      <div class="audit-logs-card">
+        <div class="card-header-sm">
+          <span>Real-time Audit Trail</span>
+          <span class="live-indicator">LIVE</span>
+        </div>
+        <div class="audit-log-list" id="auditLogList">
+          <!-- Real-time audit logs -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- COLUMN 2: Skill Processing Engine & Gated Triage -->
+    <section class="center-panel">
+      <!-- Incident Classification Banner -->
+      <div class="triage-status-banner" id="triageBanner">
+        <div class="banner-left">
+          <div class="severity-stamp" id="severityStamp">P1</div>
+          <div class="banner-details">
+            <div class="banner-title-row">
+              <h1 class="incident-headline" id="incidentHeadline">Production Checkout Failure</h1>
+              <span class="sla-countdown-pill" id="slaPill">⏱️ SLA: &lt; 30 Minutes</span>
+            </div>
+            <div class="incident-subline" id="incidentSubline">Ticket ID: DEVRELAY-INC-99214_PR • Gated by Mermail</div>
+          </div>
+        </div>
+        <div class="banner-right">
+          <div class="gate-status-card" id="gateStatusCard">
+            <span class="gate-icon">🔒</span>
+            <div class="gate-info">
+              <span class="gate-title">Approval Gate</span>
+              <span class="gate-state pending" id="approvalStateLabel">PENDING APPROVAL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Structured Technical Extraction Cards -->
+      <div class="extraction-grid">
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">Affected Endpoint</span>
+            <span class="metric-card-icon">🎯</span>
+          </div>
+          <div class="metric-card-value font-mono" id="extractEndpoint">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">Error Identifier</span>
+            <span class="metric-card-icon">⚠️</span>
+          </div>
+          <div class="metric-card-value font-mono text-danger" id="extractErrorCode">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">Trace / Request ID</span>
+            <span class="metric-card-icon">🔍</span>
+          </div>
+          <div class="metric-card-value font-mono" id="extractTraceId">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">Environment</span>
+            <span class="metric-card-icon">🌐</span>
+          </div>
+          <div class="metric-card-value" id="extractEnvironment">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">SDK / Library</span>
+            <span class="metric-card-icon">📦</span>
+          </div>
+          <div class="metric-card-value font-mono" id="extractSdk">--</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-card-title">Security & Scrubbing</span>
+            <span class="metric-card-icon">🛡️</span>
+          </div>
+          <div class="metric-card-value text-success" id="extractSecurity">Active • 0 Leaks</div>
+        </div>
+      </div>
+
+      <!-- Evidence-Based Reasoning Chain -->
+      <div class="reasoning-card">
+        <div class="reasoning-header">
+          <span class="reasoning-title">
+            <span class="sparkle">💡</span> Evidence-Based Reasoning Log
+          </span>
+          <span class="badge badge-accent">Deterministic Chain-of-Thought</span>
+        </div>
+        <div class="reasoning-content" id="reasoningText">
+          Analyzing telemetry and customer message context...
+        </div>
+      </div>
+
+      <!-- Artefacts Workspace: Customer Reply & Markdown Incident Brief -->
+      <div class="artefacts-workspace">
+        <div class="tabs-header">
+          <button class="tab-btn active" id="tabCustomerReply" data-tab="customerReplyView">
+            <span>✉️ Customer Acknowledgment Draft</span>
+          </button>
+          <button class="tab-btn" id="tabIncidentBrief" data-tab="incidentBriefView">
+            <span>📋 Standardized Incident Brief (Markdown)</span>
+          </button>
+          <button class="tab-btn" id="tabEscalation" data-tab="escalationView">
+            <span>🚀 Escalation & Dispatch Routing</span>
+          </button>
+        </div>
+
+        <!-- Tab 1: Customer Reply (Editable) -->
+        <div class="tab-pane active" id="customerReplyView">
+          <div class="reply-editor-toolbar">
+            <span class="editor-note">Empathetic, non-committal response with tracking code. Operators can edit text before approval.</span>
+            <button class="btn btn-ghost btn-xs" id="resetReplyBtn">Reset Draft</button>
+          </div>
+          <textarea class="reply-textarea" id="customerReplyInput" spellcheck="false" rows="8"></textarea>
+        </div>
+
+        <!-- Tab 2: Standardized Markdown Brief -->
+        <div class="tab-pane" id="incidentBriefView">
+          <div class="brief-toolbar">
+            <span class="editor-note">Ready for Linear, GitHub Issues, or Jira Service Management.</span>
+            <button class="btn btn-secondary btn-xs" id="copyBriefBtn">Copy Markdown</button>
+          </div>
+          <pre class="brief-preview font-mono" id="incidentBriefPreview"></pre>
+        </div>
+
+        <!-- Tab 3: Escalation Channel Routing -->
+        <div class="tab-pane" id="escalationView">
+          <div class="escalation-cards-row">
+            <div class="escalation-info-box">
+              <span class="info-label">Recommended Target:</span>
+              <span class="info-val font-mono" id="escTargetChannel">#eng-payments-oncall</span>
+            </div>
+            <div class="escalation-info-box">
+              <span class="info-label">Dispatch Protocol:</span>
+              <span class="info-val font-mono" id="escActionType">SLACK_NOTIFICATION</span>
+            </div>
+            <div class="escalation-info-box">
+              <span class="info-label">Role Assignment:</span>
+              <span class="info-val" id="escRole">Primary On-Call Service Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRITICAL HUMAN APPROVAL GATE ACTION SECTION -->
+      <div class="human-approval-gate-card" id="approvalGateCard">
+        <div class="gate-card-left">
+          <div class="shield-badge">🛡️</div>
+          <div class="gate-card-text">
+            <h3>Human Approval Gate</h3>
+            <p>DevRelay will NOT send emails or alert on-call teams until authorized by an operator.</p>
+          </div>
+        </div>
+
+        <div class="gate-card-controls">
+          <div class="operator-input-group">
+            <label for="operatorNameInput">Operator Identity:</label>
+            <input type="text" id="operatorNameInput" value="Alex SRE (On-Call Lead)" class="operator-input" />
+          </div>
+
+          <!-- Web3 Wallet Credit Option -->
+          <div class="wallet-payout-toggle" id="walletPayoutToggleSection">
+            <label class="toggle-container">
+              <input type="checkbox" id="walletPayoutCheckbox" checked>
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">Auto-Credit 250 USDC SLA Guarantee</span>
+            </label>
+          </div>
+
+          <div class="gate-action-buttons">
+            <button class="btn btn-danger btn-outline" id="rejectBtn">
+              <span>✕ Discard / Reject</span>
+            </button>
+            <button class="btn btn-success btn-lg glow-btn" id="approveBtn">
+              <span class="btn-icon">✓</span>
+              <span>Approve &amp; Dispatch Actions</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLUMN 3: Live Toolchain Delivery Simulation -->
+    <aside class="right-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span class="icon">📡</span>
+          <h2>Live Dispatch Previews</h2>
+        </div>
+        <span class="badge badge-success" id="dispatchStatusBadge">Awaiting Gate</span>
+      </div>
+
+      <!-- Toolchain Tabs -->
+      <div class="dispatch-tabs-header">
+        <button class="dispatch-tab active" data-dtab="slackSim">
+          <span>Slack Block Kit</span>
+        </button>
+        <button class="dispatch-tab" data-dtab="emailSim">
+          <span>Customer Inbox</span>
+        </button>
+        <button class="dispatch-tab" data-dtab="pagerdutySim">
+          <span>PagerDuty / GitHub</span>
+        </button>
+        <button class="dispatch-tab" data-dtab="walletSim">
+          <span>Web3 Wallet</span>
+        </button>
+      </div>
+
+      <!-- Slack Simulated Channel View -->
+      <div class="dispatch-content-pane active" id="slackSim">
+        <div class="slack-mockup">
+          <div class="slack-header">
+            <span class="slack-hash">#</span>
+            <span class="slack-channel-name" id="slackChannelTitle">eng-payments-oncall</span>
+            <span class="slack-topic">| Active On-Call Incident Stream</span>
+          </div>
+          <div class="slack-message-stream" id="slackMessageStream">
+            <div class="slack-message">
+              <div class="slack-avatar">⚡</div>
+              <div class="slack-content">
+                <div class="slack-meta">
+                  <span class="slack-sender">DevRelay BOT</span>
+                  <span class="slack-badge">APP</span>
+                  <span class="slack-time">Just now</span>
+                </div>
+                <!-- Slack Block Kit Card -->
+                <div class="slack-block-card" id="slackBlockCard">
+                  <div class="slack-color-bar" id="slackColorBar"></div>
+                  <div class="slack-card-body">
+                    <div class="slack-title" id="slackMsgTitle">⚠️ [DevRelay] P1 Incident: POST /v1/checkout/charge</div>
+                    <div class="slack-fields-grid">
+                      <div><strong>Severity:</strong> <span id="slackFieldSev">P1 (&lt; 30m SLA)</span></div>
+                      <div><strong>Environment:</strong> <span id="slackFieldEnv">Production</span></div>
+                      <div><strong>Error:</strong> <span id="slackFieldErr">500 Internal Server Error</span></div>
+                      <div><strong>Trace ID:</strong> <span id="slackFieldTrace">tr_99214_prod</span></div>
+                    </div>
+                    <div class="slack-reasoning" id="slackMsgReasoning">
+                      Production payment workflow failing with no workaround.
+                    </div>
+                    <div class="slack-footer-line" id="slackMsgFooter">
+                      Ticket ID: DEVRELAY-INC-99214_PR • Authorized via Human Gate
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Inbound Email Simulator -->
+      <div class="dispatch-content-pane" id="emailSim">
+        <div class="email-client-mockup">
+          <div class="email-client-header">
+            <div class="inbox-title">Customer Mailbox (alex.dev@enterpriseapp.io)</div>
+            <span class="badge badge-success">Delivered</span>
+          </div>
+          <div class="email-message-card">
+            <div class="email-subject-line" id="deliveredEmailSubject">Re: CRITICAL: API returning 500 on /v1/checkout/charge [DEVRELAY-INC-99214_PR]</div>
+            <div class="email-from-line">From: <strong>Mermail Developer Support &lt;support@mermail.com&gt;</strong></div>
+            <div class="email-delivered-body" id="deliveredEmailBody">
+              <!-- Rendered Customer Reply -->
+            </div>
+            <div class="email-receipt-tag" id="deliveredReceiptTag">Receipt: REC-MERMAIL-READY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PagerDuty / GitHub Preview -->
+      <div class="dispatch-content-pane" id="pagerdutySim">
+        <div class="pd-mockup">
+          <div class="pd-header">
+            <span>PagerDuty Events v2 &amp; GitHub Sync</span>
+          </div>
+          <pre class="pd-payload-code font-mono" id="pagerdutyPayloadView"></pre>
+        </div>
+      </div>
+
+      <!-- Agent Web3 / x402 Wallet Preview -->
+      <div class="dispatch-content-pane" id="walletSim">
+        <div class="wallet-mockup">
+          <div class="wallet-card-hero">
+            <div class="wallet-title-row">
+              <span>Agent Autonomous Vault</span>
+              <span class="badge badge-accent">Base Mainnet L2</span>
+            </div>
+            <div class="wallet-big-balance" id="walletHeroBalance">5,000.00 USDC</div>
+            <div class="wallet-address font-mono">0x3F8a49c4E350E4a896C773De56Ce96aDb618991D</div>
+          </div>
+          <div class="tx-history-title">Recent Automated Micro-Refunds &amp; SLA Credits</div>
+          <div class="tx-history-list" id="walletTxList">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Post-Execution Report Modal / Card -->
+      <div class="execution-report-card" id="executionReportCard" style="display: none;">
+        <div class="report-header">
+          <span class="report-check">✓</span>
+          <div>
+            <h4>Execution Report</h4>
+            <span class="report-time" id="reportExecTime">Executed 10:15:20 AM</span>
+          </div>
+        </div>
+        <div class="report-stats-grid">
+          <div>Email: <span class="text-success" id="repEmail">Sent</span></div>
+          <div>Slack: <span class="text-success" id="repSlack">Delivered</span></div>
+          <div>PagerDuty: <span class="text-subtle" id="repPd">Skipped</span></div>
+          <div>Wallet: <span class="text-accent" id="repWallet">250 USDC</span></div>
+        </div>
+        <div class="report-logs-scroll" id="reportLogsScroll"></div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Ingest Custom Email Modal -->
+  <div class="modal-backdrop" id="customEmailModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Ingest Custom Technical Email</h3>
+        <button class="btn btn-ghost btn-sm" id="closeCustomModalBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>From (Customer Email):</label>
+          <input type="text" id="customFromInput" class="form-control" value="lead.dev@acme-corp.com">
+        </div>
+        <div class="form-group">
+          <label>Subject:</label>
+          <input type="text" id="customSubjectInput" class="form-control" value="Urgent: 502 Bad Gateway on POST /v2/auth/token">
+        </div>
+        <div class="form-group">
+          <label>Email Body (Paste logs, stack traces, or support message):</label>
+          <textarea id="customBodyInput" class="form-control font-mono" rows="8">Hi Team,
+Our users cannot authenticate. We are getting 502 Bad Gateway on POST /v2/auth/token since 10:00 UTC.
+Trace ID: tr_auth_99182
+Environment: Production
+SDK: mermail-node-v3.4.1
+Please escalate immediately!</textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelCustomModalBtn">Cancel</button>
+        <button class="btn btn-primary" id="submitCustomEmailBtn">⚡ Ingest &amp; Analyze with DevRelay</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

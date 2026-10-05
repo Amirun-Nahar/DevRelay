@@ -1,0 +1,8 @@
+{
+  "id": "msg_vague_complaint",
+  "from": "frustrated.user@startup.io",
+  "to": "support@mermail.com",
+  "subject": "Everything is broken, nothing is working!",
+  "body": "Hi Support,\n\nOur system is completely broken and nothing is working today. Our developers cannot use the integration at all. Fix this immediately or we are cancelling our plan.\n\nRegards,\nTom",
+  "timestamp": "2026-10-02T14:30:00Z"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "msg_p0_global_outage",
+  "from": "marcus.lead@globalfin.com",
+  "to": "support@mermail.com",
+  "subject": "EMERGENCY: Complete Global Outage across all API regions & Data Corruption",
+  "body": "Urgent Pager Alert,\n\nOur entire platform infrastructure is down. Every single API request to https://api.service.com is returning 503 Service Unavailable or connection resets. We are observing potential data loss on our primary clusters.\n\nAll tenants and enterprise customer accounts are completely blocked.\nTrace ID: tr_global_9941a8e\nEnvironment: Production\nImpact: System-wide blackout affecting 100% of traffic.\n\nPlease escalate immediately to SRE leads!\n\nMarcus Vance\nHead of Infrastructure",
+  "timestamp": "2026-10-02T08:30:15Z"
+}
